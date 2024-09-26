@@ -2,6 +2,7 @@
  
 
 Ovaj projekat je fokusiran na rad sa bazom podataka i uključuje sledeće komponente:
+- Kreiranje tabela
 - Kreiranje pogleda
 - Dnevnik tabela (journal tables)
 - Trigeri
