@@ -7,22 +7,21 @@ Ovaj projekat je fokusiran na rad sa bazom podataka i uključuje sledeće kompon
 - Trigeri
 - Izveštaji
 
-## Kreiranje Pogona
+## Kreiranje Pogleda
 
 ### Pogled: Top 3 Menadžera
 
-Ovaj pogled prikazuje top 3 menadžera koji su kreirali najjeftinije aranžmane u agenciji.
+Pogled prikazuje top 3 menadžera koji su kreirali najjeftinije aranžmane u agenciji.
 
-```sql
-CREATE OR REPLACE VIEW TopMenadzeri AS
-SELECT *
-FROM (
-  SELECT m.mbr, m.ime, m.prezime, SUM(c.iznos) AS ukupno_iznos
-  FROM Menadzer m
-  LEFT OUTER JOIN Ponuda p ON m.mbr = p.mbr
-  LEFT OUTER JOIN Aranzman a ON p.idponud = a.idaranz
-  LEFT OUTER JOIN Ima_Cenu ic ON a.idaranz = ic.idaranz
-  LEFT OUTER JOIN Cena c ON ic.idcena = c.idcena
-  GROUP BY m.mbr, m.ime, m.prezime
-  ORDER BY SUM(c.iznos) ASC
-) WHERE ROWNUM <= 3;
+ ## Zurnal Tabela
+ Tabela Aranzman_Log se koristi za beleženje svih promena u tabeli Aranzman (zakazani, otkazani, odlozeni...).
+
+ ## Trigeri
+### Kreiranje Trigera za Dnevnik
+Triger Aranzman_Trigger automatski beleži sve INSERT, UPDATE, ili DELETE operacije na tabeli Aranzman u tabeli Aranzman_Log.
+
+## Izveštaji
+### Kreiranje Procedura za Izveštaj
+Procedura Izvestaj_Dest_Aranz generiše izveštaj koji prikazuje sve aranžmane za svaku destinaciju (koristeći prethodno kreirane Kursore).
+
+
